@@ -46,7 +46,6 @@ def get_most_exp_day():
     week_days = ("Понедельник", "Вторник", "Среда", "Четверг",
                  "Пятница", "Суботта", "Воскресенье")
     days = {}
-
     for payments in data:
         if get_date(payments["payments_date"]).weekday() in days:
             days[get_date(payments["payments_date"]).weekday()] += payments["amount"]
