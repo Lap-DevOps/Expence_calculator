@@ -21,9 +21,6 @@ def get_most_common_item():
     data = get_statistic_data()
     quantity = {}
     for payments in data:
-        # print(payments, type(payments))
-        # print(quantity)
-        # print(payments["expense_id"])
         if payments["expense_id"] in quantity:
             quantity[payments["expense_id"]]["qty"] += 1
         else:
