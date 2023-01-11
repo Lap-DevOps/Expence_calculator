@@ -21,9 +21,6 @@ def get_most_common_item():
     data = get_statistic_data()
     quantity = {}
     for payments in data:
-        # print(payments, type(payments))
-        # print(quantity)
-        # print(payments["expense_id"])
         if payments["expense_id"] in quantity:
             quantity[payments["expense_id"]]["qty"] += 1
         else:
@@ -71,3 +68,8 @@ def get_most_exp_month():
         else:
             days[get_date(payments["payments_date"]).month] = payments["amount"]
     return month_list[max(days, key=days.get)]
+
+
+def get_table_data():
+    data = get_statistic_data()
+    return [(i['id'], i['name'], i['amount'], '{:%d-%m-%Y}'.format(get_date(i['payments_date']))) for i in data]
