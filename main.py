@@ -11,9 +11,7 @@ import expenses_helper as eh
 # initiate main window and app name
 main_window = tk.Tk()
 main_window.title("My App")
-# main_window.geometry("500x500")
-# main_window.minsize(250, 250)
-# main_window.maxsize(500, 500)
+
 
 # make several frames in window and locate them
 frame_add_form = tk.Frame(main_window, bg="green")
