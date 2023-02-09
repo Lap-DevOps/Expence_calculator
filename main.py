@@ -1,10 +1,10 @@
 # This is example of Python program.
 # Small expense calculator
 
-import sqlite3
 import tkinter as tk
 from tkinter import messagebox as mbox
 from tkinter import ttk
+
 from tkcalendar import DateEntry
 
 import expenses_helper as eh
@@ -17,21 +17,17 @@ class App(tk.Tk):
         self.lang = 'ru'
         self.schema = eh.get_lang_schema(self.lang)
         self.style = ttk.Style()
-        self.style.configure('ErrLbl.TLabel', foreground ='red', padding=(10,10,60,10))
-        self.style.configure('Smpllbl.TLabel', padding=(10,10,60,10))
-        self.style.configure('BldLbl.TLabel', font=('Helvetica',13,'bold'),
+        self.style.configure('ErrLbl.TLabel', foreground='red', padding=(10, 10, 60, 10))
+        self.style.configure('Smpllbl.TLabel', padding=(10, 10, 60, 10))
+        self.style.configure('BldLbl.TLabel', font=('Helvetica', 13, 'bold'),
                              padding=(0, 10, 0, 10))
         self['background'] = '#EBEBEB'
-       # self.conf = {'padx': (0, 0), 'pady': 0}
-        #self.bold_font = 'Helvetica 13 bold'
-        # self.geometry('500x500')
         self.put_frames()
         self.put_menu()
         self.popup = Popup(self)
 
     def put_menu(self):
         self.config(menu=MainMenu(self))
-
 
     def put_frames(self):
         self.add_form_frame = AddForm(self).grid(row=0, column=0, sticky='nswe')
@@ -45,14 +41,10 @@ class App(tk.Tk):
         self.put_frames()
         self.put_menu()
 
-
-
     def switch_lang(self, language):
-        self.lang= language
-        self.schema= eh.get_lang_schema(language)
+        self.lang = language
+        self.schema = eh.get_lang_schema(language)
         self.refresh()
-
-
 
 
 class AddForm(tk.Frame):
@@ -80,15 +72,10 @@ class AddForm(tk.Frame):
         self.f_amount.grid(row=1, column=1, sticky='e', )
         self.l_date.grid(row=2, column=0, sticky='w', )
         self.f_date.grid(row=2, column=1, sticky='e', )
-        self.btn_submit.grid(row=3, column=0, columnspan=2, sticky='n',)
-
+        self.btn_submit.grid(row=3, column=0, columnspan=2, sticky='n', )
         self.f_date._top_cal.overrideredirect(False)
 
-        #self.ru = ttk.Radiobutton(self, text='RU', value='ru')
-        # self.ru.grid(row=4, column=0)
-
     def validate_amount(self, input):
-        #print(input, input)
         try:
             x = float(input)
             return True
@@ -129,7 +116,6 @@ class StatFrame(tk.Frame):
         super().__init__(parent)
         self['background'] = self.master['background']
         self.put_widgets()
-        #self.style = self.master['style']
 
     def put_widgets(self):
         l_most_common_text = ttk.Label(self, text=self.master.schema['l_most_common'], style='Smpllbl.TLabel')
@@ -141,7 +127,7 @@ class StatFrame(tk.Frame):
         l_exp_month_text = ttk.Label(self, text=self.master.schema['l_exp_month'], style='Smpllbl.TLabel')
         l_exp_month_value = ttk.Label(self, text=eh.get_most_expansive_month((self.master.lang)), style='BldLbl.TLabel')
 
-        l_most_common_text.grid(row='0', column='0', sticky='w',)
+        l_most_common_text.grid(row='0', column='0', sticky='w', )
         l_most_common_value.grid(row='0', column='1', sticky='e', )
         l_exp_item_text.grid(row='1', column='0', sticky='w', )
         l_exp_item_value.grid(row='1', column='1', sticky='e', )
@@ -159,8 +145,7 @@ class TableFrame(tk.Frame):
 
     def put_widgets(self):
         table = ttk.Treeview(self, show='headings', )
-       # heads = ['id', 'mane', 'amount', 'date']
-        l=self.master.schema
+        l = self.master.schema
         heads = [
             l['l_head_id'],
             l['l_head_name'],
@@ -185,7 +170,6 @@ class MainMenu(tk.Menu):
     def __init__(self, mainwindow):
         super().__init__(mainwindow)
 
-
         file_menu = tk.Menu(self)
         option_menu = tk.Menu(self)
         help_menu = tk.Menu(self)
@@ -194,21 +178,19 @@ class MainMenu(tk.Menu):
         file_menu.add_separator()
         file_menu.add_command(label="Quit", command=lambda: mainwindow.popup.show('quit'))
 
-
         lang_menu = tk.Menu(option_menu)
         self.s_var = tk.StringVar()
         self.s_var.set(self.master.lang)
         lang_menu.add_radiobutton(label="Русский", variable=self.s_var, value='ru',
-                                  command= lambda : mainwindow.switch_lang(self.s_var.get()))
+                                  command=lambda: mainwindow.switch_lang(self.s_var.get()))
         lang_menu.add_radiobutton(label='English', variable=self.s_var, value='en',
-                                  command= lambda : mainwindow.switch_lang(self.s_var.get()))
+                                  command=lambda: mainwindow.switch_lang(self.s_var.get()))
         option_menu.add_cascade(label='Switch language', menu=lang_menu)
         option_menu.add_separator()
         option_menu.add_command(label='Switch theme')
         help_menu.add_command(label='About Us', command=lambda: mainwindow.popup.show('faq'))
         help_menu.add_separator()
         help_menu.add_command(label='FAQ', command=lambda: mainwindow.popup.show('faq'))
-
 
         self.add_cascade(label='File', menu=file_menu)
         self.add_cascade(label='Options', menu=option_menu)
@@ -219,9 +201,8 @@ class Popup:
     def __init__(self, master):
         self.master = master
 
-
     def quit(self):
-        answer = mbox.askquestion('Quit','A You sure?')
+        answer = mbox.askquestion('Quit', 'A You sure?')
         if answer == "yes":
             self.master.destroy()
         else:
@@ -229,13 +210,10 @@ class Popup:
 
     def faq(self):
         self.master.bell()
-        mbox.showinfo('FAQ','This functionality not reade yet')
+        mbox.showinfo('FAQ', 'This functionality not reade yet')
 
     def show(self, window_type):
         getattr(self, window_type)()
-
-
-
 
 
 if __name__ == '__main__':
