@@ -65,7 +65,6 @@ class AddForm(tk.Frame):
                                 selectforeground='red', background='white',
                                 date_pattern='dd-mm-YYYY')
         self.btn_submit = ttk.Button(self, text=self.master.schema['btn_submit'], command=self.form_submit)
-
         self.l_choose.grid(row=0, column=0, sticky='w', )
         self.f_choose.grid(row=0, column=1, sticky='e', )
         self.l_amount.grid(row=1, column=0, sticky='w', )

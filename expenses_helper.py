@@ -51,8 +51,7 @@ def get_most_expansive_day(lang):
     data = get_statistic_data()
     week_days = {'ru': ("Понедельник", "Вторник", "Среда", "Четверг", "Пятница",
                         "Суббота", "Воскресенье"),
-                 'en': ('Monday', 'Tuesday', 'Wednesday', 'Thusday', 'Friday', 'Saturday', 'Sunday'),
-                 }
+                 'en': ('Monday', 'Tuesday', 'Wednesday', 'Thusday', 'Friday', 'Saturday', 'Sunday'), }
     days = {}
     for payment in data:
         if get_date(payment['payment_date']).weekday() in days:
